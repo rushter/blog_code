@@ -2,7 +2,7 @@
 
 A script that checks SSH access given a public key.
 
-Read more: https://rushter.com/blog/pulic-ssh-keys/
+Read more: https://rushter.com/blog/public-ssh-keys/
 
 ```bash
 $ pip install requests paramiko
