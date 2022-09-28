@@ -58,7 +58,7 @@ def probe_host(hostname_or_ip, port, username, public_key):
 
 def get_public_key(username):
     r = requests.get('https://github.com/%s.keys' % username)
-    return r.content.decode('utf-8')
+    return r.content.decode('utf-8').splitlines()
 
 
 def main():
@@ -73,19 +73,20 @@ def main():
     args = parser.parse_args(sys.argv[1:])
     logging.basicConfig(level=args.loglevel)
     if args.github_username:
-        key = get_public_key(args.github_username)
+        keys = get_public_key(args.github_username)
     elif args.public_key:
-        key = open(args.public_key, 'rt').read()
+        keys = [open(args.public_key, 'rt').read()]
     else:
         raise ValueError("Public key is missing. Please use --github-username or --public-key")
 
-    patch_paramiko()
-    probe_host(
-        hostname_or_ip=args.host,
-        port=args.port,
-        username=args.ssh_username,
-        public_key=key
-    )
+    for key in keys:
+        patch_paramiko()
+        probe_host(
+            hostname_or_ip=args.host,
+            port=args.port,
+            username=args.ssh_username,
+            public_key=key
+        )
 
 
 if __name__ == '__main__':
