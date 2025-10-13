@@ -1,0 +1,119 @@
+
+theme = "catppuccin_frappe"
+
+[editor]
+line-number = "relative"
+mouse = true
+rulers = [120]
+true-color = true
+completion-replace = true
+trim-trailing-whitespace = true
+end-of-line-diagnostics = "hint"
+color-modes = true
+rainbow-brackets = true
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
+
+[editor.lsp]
+display-inlay-hints = false
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.indent-guides]
+render = true
+character = "╎"
+skip-levels = 0
+
+[editor.soft-wrap]
+enable = false
+
+[keys.normal."+"]
+f = ":format"
+w = ":toggle whitespace.render all"
+W = ":set whitespace.render none"
+s = ":toggle soft-wrap.enable"
+
+[keys.normal."="]
+"=" = ":format"
+
+[editor.statusline]
+left = [
+  "mode",
+  "spinner",
+  "version-control",
+  "spacer",
+  "separator",
+  "file-name",
+  "read-only-indicator",
+  "file-modification-indicator",
+
+]
+center = []
+right = [
+  "diagnostics",
+  "workspace-diagnostics",
+  "position",
+  "total-line-numbers",
+  "position-percentage",
+  "file-encoding",
+  "file-line-ending",
+  "file-type",
+  "register",
+  "selections",
+]
+separator = "│"
+mode.normal = "NOR"
+mode.insert = "INS"
+mode.select = "SEL"
+
+[keys.normal]
+D = ["ensure_selections_forward", "extend_to_line_end", "delete_selection"]
+0 = "goto_line_start"
+"$" = "goto_line_end"
+"^" = "goto_first_nonwhitespace"
+G = "goto_file_end"
+V = ["select_mode", "extend_to_line_bounds"]
+esc = ["collapse_selection", "keep_primary_selection"]
+"Cmd-s" = ":write"
+
+
+[keys.normal.space]
+e = { w = ":write", c = ":bc", x = ":bco", l = ":toggle lsp.display-inlay-hints" }
+q = ":quit"
+
+[keys.normal.space.f]
+f = "file_picker_in_current_directory"
+F = "file_picker"
+b = "file_picker_in_current_buffer_directory"
+"." = ":toggle-option file-picker.git-ignore"
+g = "global_search"
+e = "file_explorer"
+r = ":reload-all"
+x = ":reset-diff-change"
+d = [":vsplit-new", ":lang diff", ":insert-output git diff"]
+
+[keys.select]
+0 = "goto_line_start"
+"$" = "goto_line_end"
+"^" = "goto_first_nonwhitespace"
+G = "goto_file_end"
+D = ["extend_to_line_bounds", "delete_selection", "normal_mode"]
+k = ["extend_line_up", "extend_to_line_bounds"]
+j = ["extend_line_down", "extend_to_line_bounds"]
+up = ["extend_line_up", "extend_to_line_bounds"]
+down = ["extend_line_down", "extend_to_line_bounds"]
+
+[keys.select.space.f]
+s = ":reflow 100"
+
+[editor.auto-save]
+focus-lost = true
+after-delay.enable = true
+after-delay.timeout = 300000

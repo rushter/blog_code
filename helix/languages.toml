@@ -1,0 +1,89 @@
+
+[language-server.harper-ls]
+command = "harper-ls"
+args = ["--stdio"]
+
+
+[[language]]
+name = "markdown"
+language-servers = ["harper-ls"]
+
+
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
+[language-server.ruff.config]
+documentFormatting = true
+settings.run = "onSave"
+
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+config.reportMissingtypeStubs = false
+
+[[language]]
+name = "python"
+auto-format = true
+language-servers = [
+  { name = "ruff" },
+  { name = "zuban" },
+  { name = "harper-ls" },
+  { name = "codebook" },
+]
+roots = ["pyproject.toml", "setup.py", "poetry.lock", ".git", ".jj", ".venv/"]
+
+
+[language-server.zuban]
+command = "zuban"
+args = ["server"]
+
+[language-server.basedpyright]
+command = "basedpyright-langserver"
+args = ["--stdio"]
+
+[language-server.basedpyright.config.python.analysis]
+typeCheckingMode = "standard"
+
+
+[[language]]
+name = "rust"
+language-servers = ["rust-analyzer", "harper-ls", "codebook"]
+
+[language-server.rust-analyzer.config]
+cargo.features = "all"
+check.command = "clippy"
+
+
+[[language]]
+name = "sql"
+formatter = { command = "sqlfluff", args = [
+  "format",
+  "--dialect",
+  "clickhouse",
+  '-e',
+  'CP02',
+  '-',
+] }
+
+
+
+[[language]]
+name = "cython"
+language-servers = [
+  { name = "harper-ls" },
+]
+
+
+[language-server.yaml-language-server.config.yaml]
+completion = true
+validate = true
+hover = true
+format = { enable = true, bracketSpacing = true }
+schemas = []
+schemaStore = { enable = false }
+
+
+[language-server.codebook]
+command = "codebook-lsp"
+args = ["serve"]
